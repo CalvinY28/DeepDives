@@ -7,7 +7,8 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 12f;
     public float swimUpForce = 5f;
-    public float swimSpeed = 3f;
+    public float waterLerpSpeed = 3f; // lower = more slippery
+    public float landLerpSpeed = 10f;
 
     public Transform groundCheck;
     public LayerMask groundLayer;
@@ -17,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private float moveInput;
     private bool isGrounded;
     private bool isSwimming;
+    private float currentVelocityX;
 
     private Animator anim;
     private SpriteRenderer spriteRenderer;
@@ -45,25 +47,29 @@ public class PlayerMovement : MonoBehaviour
         if (moveInput != 0)
             spriteRenderer.flipX = moveInput < 0;
 
+        float targetVelocityX = moveInput * moveSpeed;
+        float lerpSpeed = isSwimming ? waterLerpSpeed : landLerpSpeed;
+
+        currentVelocityX = Mathf.Lerp(currentVelocityX, targetVelocityX, Time.deltaTime * lerpSpeed);
+
+        // Handle vertical movement
         if (isSwimming)
         {
-            // Flappy Bird swim mechanic
-            rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(currentVelocityX, rb.velocity.y);
 
             if (Input.GetButtonDown("Jump"))
             {
-                rb.velocity = new Vector2(rb.velocity.x, swimUpForce); // push up
+                rb.velocity = new Vector2(rb.velocity.x, swimUpForce);
             }
         }
         else
         {
-            // Regular land movement
+            rb.velocity = new Vector2(currentVelocityX, rb.velocity.y);
+
             if (Input.GetButtonDown("Jump") && isGrounded)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             }
-
-            rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
         }
 
         // Animator parameters
@@ -84,7 +90,8 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Water"))
         {
             isSwimming = true;
-            rb.gravityScale = 1.5f; // simulate buoyancy
+            rb.gravityScale = 1f; // simulate buoyancy
+            currentVelocityX = rb.velocity.x;
         }
     }
 
@@ -94,6 +101,8 @@ public class PlayerMovement : MonoBehaviour
         {
             isSwimming = false;
             rb.gravityScale = 3f; // reset to normal
+            currentVelocityX = rb.velocity.x;
         }
     }
 }
+
