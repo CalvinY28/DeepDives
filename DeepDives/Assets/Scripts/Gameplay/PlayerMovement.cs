@@ -6,6 +6,9 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 12f;
+    public float swimUpForce = 5f;
+    public float swimSpeed = 3f;
+
     public Transform groundCheck;
     public LayerMask groundLayer;
     public GameObject spriteObject;
@@ -13,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private float moveInput;
     private bool isGrounded;
+    private bool isSwimming;
+
     private Animator anim;
     private SpriteRenderer spriteRenderer;
 
@@ -36,26 +41,59 @@ public class PlayerMovement : MonoBehaviour
     {
         moveInput = Input.GetAxisRaw("Horizontal");
 
-        // Flip the sprite based on movement direction
+        // Flip sprite
         if (moveInput != 0)
             spriteRenderer.flipX = moveInput < 0;
 
-        // Play jump
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (isSwimming)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            // Flappy Bird swim mechanic
+            rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+
+            if (Input.GetButtonDown("Jump"))
+            {
+                rb.velocity = new Vector2(rb.velocity.x, swimUpForce); // push up
+            }
+        }
+        else
+        {
+            // Regular land movement
+            if (Input.GetButtonDown("Jump") && isGrounded)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            }
+
+            rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
         }
 
-        // Update Animator parameters
+        // Animator parameters
         anim.SetFloat("Speed", Mathf.Abs(moveInput));
         anim.SetBool("isGrounded", isGrounded);
+        anim.SetBool("isSwimming", isSwimming);
     }
 
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+        // Ground check only when not swimming
+        if (!isSwimming)
+            isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+    }
 
-        // Ground check
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Water"))
+        {
+            isSwimming = true;
+            rb.gravityScale = 1.5f; // simulate buoyancy
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Water"))
+        {
+            isSwimming = false;
+            rb.gravityScale = 3f; // reset to normal
+        }
     }
 }
