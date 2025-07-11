@@ -870,7 +870,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  jumpForce: 12
+  jumpForce: 6
   swimUpForce: 5
   waterLerpSpeed: 3
   landLerpSpeed: 10
