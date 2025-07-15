@@ -104,5 +104,10 @@ public class PlayerMovement : MonoBehaviour
             currentVelocityX = rb.velocity.x;
         }
     }
+
+    public bool IsSwimming()
+    {
+        return isSwimming;
+    }
 }
 
