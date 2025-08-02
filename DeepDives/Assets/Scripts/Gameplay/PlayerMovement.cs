@@ -13,18 +13,22 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheck;
     public LayerMask groundLayer;
     public GameObject spriteObject;
+    public PhysicsMaterial2D landMaterial;
+    public PhysicsMaterial2D waterMaterial;
 
     private Rigidbody2D rb;
     private float moveInput;
     private bool isGrounded;
     private bool isSwimming;
     private float currentVelocityX;
+    private Collider2D playerCollider;
 
     private Animator anim;
     private SpriteRenderer spriteRenderer;
 
     void Start()
     {
+        playerCollider = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
 
         // Get Animator and SpriteRenderer from child
@@ -92,6 +96,11 @@ public class PlayerMovement : MonoBehaviour
             isSwimming = true;
             rb.gravityScale = 1f; // simulate buoyancy
             currentVelocityX = rb.velocity.x;
+
+            if (playerCollider != null && waterMaterial != null)
+            {
+                playerCollider.sharedMaterial = waterMaterial;
+            }
         }
     }
 
@@ -102,6 +111,11 @@ public class PlayerMovement : MonoBehaviour
             isSwimming = false;
             rb.gravityScale = 3f; // reset to normal
             currentVelocityX = rb.velocity.x;
+
+            if (playerCollider != null && landMaterial != null)
+            {
+                playerCollider.sharedMaterial = landMaterial;
+            }
         }
     }
 
