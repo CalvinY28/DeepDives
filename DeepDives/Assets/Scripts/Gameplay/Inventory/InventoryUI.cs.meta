@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 932c1bd6658524b4babb6aa597583855
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - inventoryPanel: {instanceID: 0}
+  - playerInventoryGrid: {instanceID: 0}
+  - chestInventoryGrid: {instanceID: 0}
+  - slotPrefab: {fileID: 6156290445563608852, guid: 76d3d3f3c9f78444fad39d5e36748acc, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
