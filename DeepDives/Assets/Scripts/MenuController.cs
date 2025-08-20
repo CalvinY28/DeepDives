@@ -42,7 +42,7 @@ public class MenuController : MonoBehaviour
     public void ActivateMenu(bool active)
     {
         isActive = active;
-        Time.timeScale = active ? 0 : 1; // Pause game when menu is up
+        //Time.timeScale = active ? 0 : 1; // Pause game when menu is up
         gameObject.SetActive(active);
         UpdateVisuals();
     }
