@@ -23,6 +23,15 @@ public class MenuController : MonoBehaviour
     {
         if (!isActive) return;
 
+        // Block movement input when menu is open
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) ||
+            Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
+        {
+            // Do nothing — eat the input
+            return;
+        }
+
+        // Menu navigation logic
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             currentIndex = (currentIndex + 1) % options.Count;
@@ -42,7 +51,8 @@ public class MenuController : MonoBehaviour
     public void ActivateMenu(bool active)
     {
         isActive = active;
-        //Time.timeScale = active ? 0 : 1; // Pause game when menu is up
+        Time.timeScale = active ? 0 : 1; // Pause game when menu is up
+        
         gameObject.SetActive(active);
         UpdateVisuals();
     }

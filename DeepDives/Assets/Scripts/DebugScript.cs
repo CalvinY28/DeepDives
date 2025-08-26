@@ -8,7 +8,9 @@ public class MenuTester : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            menu.ActivateMenu(true);
+            // if your MenuController has an IsOpen flag, prefer that over activeSelf
+            bool isOpen = menu.gameObject.activeSelf;
+            menu.ActivateMenu(!isOpen);
         }
     }
 }

@@ -45,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale == 0) return; // Prevent input if paused by menu
         moveInput = Input.GetAxisRaw("Horizontal");
 
         // Flip sprite
