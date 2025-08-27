@@ -34,6 +34,6 @@ public class CurrencyDisplay : MonoBehaviour
 
     private void UpdateLabel(int value)
     {
-        if (label) label.text = $"Coins: {value}";
+        if (label) label.text = $"{value}";
     }
 }
