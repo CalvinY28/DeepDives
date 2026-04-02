@@ -60,20 +60,20 @@ public class PlayerMovement : MonoBehaviour
         // Handle vertical movement
         if (isSwimming)
         {
-            rb.velocity = new Vector2(currentVelocityX, rb.velocity.y);
+            rb.linearVelocity = new Vector2(currentVelocityX, rb.linearVelocity.y);
 
             if (Input.GetButtonDown("Jump"))
             {
-                rb.velocity = new Vector2(rb.velocity.x, swimUpForce);
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, swimUpForce);
             }
         }
         else
         {
-            rb.velocity = new Vector2(currentVelocityX, rb.velocity.y);
+            rb.linearVelocity = new Vector2(currentVelocityX, rb.linearVelocity.y);
 
             if (Input.GetButtonDown("Jump") && isGrounded)
             {
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             }
         }
 
@@ -96,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isSwimming = true;
             rb.gravityScale = 1f; // simulate buoyancy
-            currentVelocityX = rb.velocity.x;
+            currentVelocityX = rb.linearVelocity.x;
 
             if (playerCollider != null && waterMaterial != null)
             {
@@ -111,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isSwimming = false;
             rb.gravityScale = 3f; // reset to normal
-            currentVelocityX = rb.velocity.x;
+            currentVelocityX = rb.linearVelocity.x;
 
             if (playerCollider != null && landMaterial != null)
             {
