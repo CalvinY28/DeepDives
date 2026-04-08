@@ -42,7 +42,7 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639112427024314562
+  lastModified: 639112448639424824
   FileSizes:
   - Name: Desktop
     Value: 2714
@@ -82,11 +82,38 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639112427024324557
+  lastModified: 639112448639434829
   FileSizes:
   - Name: Desktop
-    Value: 1026
+    Value: 1124
   Exists: 1
+--- !u!114 &-1956876558709381912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Seagull_Chirp_Random
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Seagull_Chirp_Random
+  Guid:
+    Data1: -1999806914
+    Data2: 1195754027
+    Data3: 58804388
+    Data4: -84705727
+  Banks:
+  - {fileID: 7081430189654213316}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 6000
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,13 +136,15 @@ MonoBehaviour:
   - {fileID: 1240422828708520119}
   - {fileID: 7315310968015382713}
   - {fileID: 3179458301426420747}
+  - {fileID: -1956876558709381912}
+  - {fileID: 938944046742920468}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5010258732884138052}
   StringsBanks:
   - {fileID: -2784358243557595788}
   cacheVersion: 131848
-  cacheTime: 639112427040861017
+  cacheTime: 639112451423815074
   SerializableEventsDict:
   - key: event:/Test_3D_Timeline
     index: 0
@@ -125,6 +154,37 @@ MonoBehaviour:
     index: 2
   - key: event:/Crashing_Waves
     index: 3
+  - key: event:/Seagull_Chirp_Random
+    index: 4
+  - key: event:/Seagull_Chirp_Loop
+    index: 5
+--- !u!114 &938944046742920468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Seagull_Chirp_Loop
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Seagull_Chirp_Loop
+  Guid:
+    Data1: 593792682
+    Data2: 1224104636
+    Data3: -1873818703
+    Data4: 563781533
+  Banks:
+  - {fileID: 7081430189654213316}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 10500
 --- !u!114 &1240422828708520119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,10 +254,10 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Play.bank
   Name: Play
   StudioPath: bank:/Play
-  lastModified: 639112427040861017
+  lastModified: 639112451423815074
   FileSizes:
   - Name: Desktop
-    Value: 2382336
+    Value: 2529376
   Exists: 1
 --- !u!114 &7315310968015382713
 MonoBehaviour:
