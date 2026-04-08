@@ -107,13 +107,13 @@ MonoBehaviour:
     Data4: -84705727
   Banks:
   - {fileID: 7081430189654213316}
-  IsStream: 0
+  IsStream: 1
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 6000
+  Length: 500
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,7 +144,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: -2784358243557595788}
   cacheVersion: 131848
-  cacheTime: 639112451423815074
+  cacheTime: 639112476777442543
   SerializableEventsDict:
   - key: event:/Test_3D_Timeline
     index: 0
@@ -234,7 +234,7 @@ MonoBehaviour:
   - {fileID: 7081430189654213316}
   IsStream: 1
   Is3D: 1
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
@@ -254,10 +254,10 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Play.bank
   Name: Play
   StudioPath: bank:/Play
-  lastModified: 639112451423815074
+  lastModified: 639112476777442543
   FileSizes:
   - Name: Desktop
-    Value: 2529376
+    Value: 2578112
   Exists: 1
 --- !u!114 &7315310968015382713
 MonoBehaviour:
@@ -281,7 +281,7 @@ MonoBehaviour:
   - {fileID: 7081430189654213316}
   IsStream: 1
   Is3D: 1
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
