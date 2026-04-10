@@ -156,7 +156,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (!hit.collider) return;
 
-        if (hit.collider.CompareTag("Sand"))
+        if (hit.collider.CompareTag("Sand")) // if im hitting sand tag change label to sand and etc
             currentSurfaceLabel = "Sand";
         else if (hit.collider.CompareTag("Wood"))
             currentSurfaceLabel = "Wood";
@@ -168,7 +168,7 @@ public class PlayerMovement : MonoBehaviour
     {
         bool isMoving = Mathf.Abs(moveInput) > 0.1f;
 
-        if (!isGrounded || isSwimming || !isMoving)
+        if (!isGrounded || isSwimming || !isMoving) // not playing footstep
         {
             footstepTimer = 0f;
             return;
@@ -176,20 +176,20 @@ public class PlayerMovement : MonoBehaviour
 
         footstepTimer += Time.deltaTime;
 
-        if (footstepTimer >= walkStepInterval)
+        if (footstepTimer >= walkStepInterval) // playing footstep with interval to make slower or faster.
         {
             PlayFootstep();
             footstepTimer = 0f;
         }
     }
 
-    public void PlayFootstep()
+    public void PlayFootstep() // make footstep noise at player position and make sure to check the type.
     {
         EventInstance step = RuntimeManager.CreateInstance(footstepEvent);
-        RuntimeManager.AttachInstanceToGameObject(step, transform);
+        RuntimeManager.AttachInstanceToGameObject(step, gameObject);
         step.setParameterByNameWithLabel("SurfaceType", currentSurfaceLabel);
         step.start();
-        step.release();
+        step.release(); // release smoothes it just in case (ialready tried to smooth it)
     }
 }
 
