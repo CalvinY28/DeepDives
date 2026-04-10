@@ -5,5 +5,5 @@ using UnityEngine.Events;
 public class MenuOption
 {
     public string label;
-    public UnityEvent onSelect; // Assignable in Inspector
+    public UnityEvent onSelect;
 }

@@ -8,8 +8,8 @@ public class ChestInteract : MonoBehaviour
     public Animator animator;
     public CanvasGroup promptGroup;
 
-    [Header("Reference to Existing Menu in Scene")]
-    public MenuController menuController; // Drag the menu GameObject's MenuController script here
+    [Header("Header for menucontroller")]
+    public MenuController menuController;
 
     private bool playerInRange = false;
     private bool isOpen = false;
@@ -24,7 +24,7 @@ public class ChestInteract : MonoBehaviour
             promptGroup.alpha = 0f;
 
         if (menuController != null)
-            menuController.gameObject.SetActive(false); // Hide menu on start
+            menuController.gameObject.SetActive(false);
     }
 
     void Update()
@@ -46,7 +46,6 @@ public class ChestInteract : MonoBehaviour
             }
             else
             {
-                // Chest is already open; reopen the menu if needed
                 if (menuController != null)
                     menuController.ActivateMenu(true);
             }
@@ -76,7 +75,6 @@ public class ChestInteract : MonoBehaviour
 
                 RuntimeManager.PlayOneShot(closeSound, transform.position);
 
-                // Optional: close menu when player leaves
                 if (menuController != null)
                     menuController.ActivateMenu(false);
             }

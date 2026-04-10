@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMOD.Studio;
+using FMODUnity;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -26,6 +28,17 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private SpriteRenderer spriteRenderer;
 
+    [Header("FMOD Footsteps")] // note this could be done as an animation event wouldve made it easier
+    public EventReference footstepEvent;
+    public LayerMask footstepSurfaceLayers;
+    public float footstepRayDistance = 0.3f;
+
+    private string currentSurfaceLabel = "Wood";
+
+    public float walkStepInterval = 0.45f;
+
+    private float footstepTimer = 0f;
+
     void Start()
     {
         playerCollider = GetComponent<Collider2D>();
@@ -39,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("SpriteObject not assigned");
+            Debug.LogWarning("not assigned");
         }
     }
 
@@ -77,10 +90,15 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        // Animator parameters
-        anim.SetFloat("Speed", Mathf.Abs(moveInput));
-        anim.SetBool("isGrounded", isGrounded);
-        anim.SetBool("isSwimming", isSwimming);
+        if (anim != null)
+        {
+            anim.SetFloat("Speed", Mathf.Abs(moveInput));
+            anim.SetBool("isGrounded", isGrounded);
+            anim.SetBool("isSwimming", isSwimming);
+        }
+
+        DetectFootstepSurface();
+        HandleFootsteps();
     }
 
     void FixedUpdate()
@@ -123,6 +141,55 @@ public class PlayerMovement : MonoBehaviour
     public bool IsSwimming()
     {
         return isSwimming;
+    }
+
+    void DetectFootstepSurface()
+    {
+        if (groundCheck == null) return;
+
+        RaycastHit2D hit = Physics2D.Raycast(
+            groundCheck.position,
+            Vector2.down,
+            footstepRayDistance,
+            footstepSurfaceLayers
+        );
+
+        if (!hit.collider) return;
+
+        if (hit.collider.CompareTag("Sand"))
+            currentSurfaceLabel = "Sand";
+        else if (hit.collider.CompareTag("Wood"))
+            currentSurfaceLabel = "Wood";
+        else
+            currentSurfaceLabel = "Wood";
+    }
+
+    void HandleFootsteps()
+    {
+        bool isMoving = Mathf.Abs(moveInput) > 0.1f;
+
+        if (!isGrounded || isSwimming || !isMoving)
+        {
+            footstepTimer = 0f;
+            return;
+        }
+
+        footstepTimer += Time.deltaTime;
+
+        if (footstepTimer >= walkStepInterval)
+        {
+            PlayFootstep();
+            footstepTimer = 0f;
+        }
+    }
+
+    public void PlayFootstep()
+    {
+        EventInstance step = RuntimeManager.CreateInstance(footstepEvent);
+        RuntimeManager.AttachInstanceToGameObject(step, transform);
+        step.setParameterByNameWithLabel("SurfaceType", currentSurfaceLabel);
+        step.start();
+        step.release();
     }
 }
 
