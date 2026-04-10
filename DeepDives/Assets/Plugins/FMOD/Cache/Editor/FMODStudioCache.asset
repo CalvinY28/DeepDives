@@ -54,6 +54,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-6910361094292792917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Chest_Close
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/SFX/Chest_Close
+  Guid:
+    Data1: -1791652502
+    Data2: 1141536477
+    Data3: 639512218
+    Data4: 537867650
+  Banks:
+  - {fileID: 7081430189654213316}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 637
 --- !u!114 &-6724597469416131318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,33 +105,6 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &-5634898158678143245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Chest_Open
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/Chest_Open
-  Guid:
-    Data1: 325821909
-    Data2: 1252660472
-    Data3: -1710280297
-    Data4: -2060591809
-  Banks:
-  - {fileID: 7081430189654213316}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1000
 --- !u!114 &-5436378022489554315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,11 +148,38 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639114257808701809
+  lastModified: 639114311925581767
   FileSizes:
   - Name: Desktop
     Value: 2714
   Exists: 1
+--- !u!114 &-4519031068907032255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Chest_Open
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/SFX/Chest_Open
+  Guid:
+    Data1: 325821909
+    Data2: 1252660472
+    Data3: -1710280297
+    Data4: -2060591809
+  Banks:
+  - {fileID: 7081430189654213316}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1000
 --- !u!114 &-3392874532701532941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,10 +215,10 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639114257808701809
+  lastModified: 639114311925591766
   FileSizes:
   - Name: Desktop
-    Value: 1350
+    Value: 1398
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -217,16 +244,17 @@ MonoBehaviour:
   - {fileID: 9220189315384230285}
   - {fileID: 1382311045689978928}
   - {fileID: -5436378022489554315}
-  - {fileID: 1933122579779967734}
   - {fileID: -8665245004849975615}
-  - {fileID: -5634898158678143245}
+  - {fileID: -6910361094292792917}
+  - {fileID: -4519031068907032255}
+  - {fileID: 1814055432830336315}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5010258732884138052}
   StringsBanks:
   - {fileID: -2784358243557595788}
   cacheVersion: 131848
-  cacheTime: 639114262966389296
+  cacheTime: 639114312526582688
   SerializableEventsDict:
   - key: event:/Test_3D_Timeline
     index: 0
@@ -240,12 +268,14 @@ MonoBehaviour:
     index: 4
   - key: event:/Character/NPC_Shopkeep_Idle
     index: 5
-  - key: event:/Chest_Close
-    index: 6
   - key: event:/Ambience/Seagull_Chirp_Loop
+    index: 6
+  - key: event:/SFX/Chest_Close
     index: 7
-  - key: event:/Chest_Open
+  - key: event:/SFX/Chest_Open
     index: 8
+  - key: event:/SFX/Coin_Collect
+    index: 9
 --- !u!114 &1240422828708520119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,7 +330,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 132000
---- !u!114 &1933122579779967734
+--- !u!114 &1814055432830336315
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -310,23 +340,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Chest_Close
+  m_Name: event:/SFX/Coin_Collect
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/Chest_Close
+  Path: event:/SFX/Coin_Collect
   Guid:
-    Data1: -1791652502
-    Data2: 1141536477
-    Data3: 639512218
-    Data4: 537867650
+    Data1: -1247567926
+    Data2: 1204804990
+    Data3: -1892180318
+    Data4: -489078289
   Banks:
   - {fileID: 7081430189654213316}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 637
+  Length: 150
 --- !u!114 &2563426846050146094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,10 +399,10 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Play.bank
   Name: Play
   StudioPath: bank:/Play
-  lastModified: 639114262966389296
+  lastModified: 639114312526582688
   FileSizes:
   - Name: Desktop
-    Value: 2691744
+    Value: 2694016
   Exists: 1
 --- !u!114 &9220189315384230285
 MonoBehaviour:
