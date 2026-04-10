@@ -10,9 +10,11 @@ public class NPCInteract : MonoBehaviour
 
     [TextArea(2, 5)]
     public string[] npcDialogueLines;
+    public string[] voiceLineLabels;
 
     private bool playerInRange = false;
     private Coroutine currentFade;
+    private int currentLineIndex = 0;
 
     void Update()
     {
@@ -20,14 +22,26 @@ public class NPCInteract : MonoBehaviour
         {
             if (speechBubble.IsActive())
             {
+                currentLineIndex++;
                 speechBubble.AdvanceDialogue();
+
+                if (currentLineIndex < voiceLineLabels.Length && audioController != null)
+                {
+                    audioController.PlayVoiceLine(voiceLineLabels[currentLineIndex]);
+                }
             }
             else
             {
+                currentLineIndex = 0;
                 speechBubble.StartDialogue(npcDialogueLines);
 
                 if (audioController != null)
                     audioController.StartTalking();
+
+                if (voiceLineLabels.Length > 0)
+                {
+                    audioController.PlayVoiceLine(voiceLineLabels[0]);
+                }
             }
         }
     }
@@ -51,6 +65,8 @@ public class NPCInteract : MonoBehaviour
 
             if (audioController != null)
                 audioController.StopTalking();
+
+            currentLineIndex = 0;
         }
     }
 
