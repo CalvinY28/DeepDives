@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8665245004849975615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambience/Seagull_Chirp_Loop
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Ambience/Seagull_Chirp_Loop
+  Guid:
+    Data1: 593792682
+    Data2: 1224104636
+    Data3: -1873818703
+    Data4: 563781533
+  Banks:
+  - {fileID: 7081430189654213316}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 10500
 --- !u!114 &-6928599105294664017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27,6 +54,85 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-6724597469416131318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/NPC_Shopkeep_Idle/Talking
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: Talking
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3880603076
+    data2: 3618471968
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-5634898158678143245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Chest_Open
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Chest_Open
+  Guid:
+    Data1: 325821909
+    Data2: 1252660472
+    Data3: -1710280297
+    Data4: -2060591809
+  Banks:
+  - {fileID: 7081430189654213316}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1000
+--- !u!114 &-5436378022489554315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Character/NPC_Shopkeep_Idle
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Character/NPC_Shopkeep_Idle
+  Guid:
+    Data1: 52903518
+    Data2: 1083070084
+    Data3: -628413028
+    Data4: -996566655
+  Banks:
+  - {fileID: 7081430189654213316}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -6724597469416131318}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 10000
 --- !u!114 &-5010258732884138052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42,7 +148,7 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639114183309013053
+  lastModified: 639114257808701809
   FileSizes:
   - Name: Desktop
     Value: 2714
@@ -82,38 +188,11 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639114183309023062
+  lastModified: 639114257808701809
   FileSizes:
   - Name: Desktop
-    Value: 1220
+    Value: 1350
   Exists: 1
---- !u!114 &-1956876558709381912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Seagull_Chirp_Random
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/Seagull_Chirp_Random
-  Guid:
-    Data1: -1999806914
-    Data2: 1195754027
-    Data3: 58804388
-    Data4: -84705727
-  Banks:
-  - {fileID: 7081430189654213316}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 500
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,60 +213,39 @@ MonoBehaviour:
   EditorEvents:
   - {fileID: -6928599105294664017}
   - {fileID: 1240422828708520119}
-  - {fileID: 7315310968015382713}
-  - {fileID: 3179458301426420747}
-  - {fileID: -1956876558709381912}
-  - {fileID: 938944046742920468}
-  - {fileID: 8061687421617743650}
+  - {fileID: 2563426846050146094}
+  - {fileID: 9220189315384230285}
+  - {fileID: 1382311045689978928}
+  - {fileID: -5436378022489554315}
+  - {fileID: 1933122579779967734}
+  - {fileID: -8665245004849975615}
+  - {fileID: -5634898158678143245}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5010258732884138052}
   StringsBanks:
   - {fileID: -2784358243557595788}
   cacheVersion: 131848
-  cacheTime: 639114183309249325
+  cacheTime: 639114262966389296
   SerializableEventsDict:
   - key: event:/Test_3D_Timeline
     index: 0
   - key: event:/Test_2D_Timeline
     index: 1
-  - key: event:/Beachly_Winds
+  - key: event:/Ambience/Beachly_Winds
     index: 2
-  - key: event:/Crashing_Waves
+  - key: event:/Ambience/Seagull_Chirp_Random
     index: 3
-  - key: event:/Seagull_Chirp_Random
+  - key: event:/Ambience/Crashing_Waves
     index: 4
-  - key: event:/Seagull_Chirp_Loop
+  - key: event:/Character/NPC_Shopkeep_Idle
     index: 5
-  - key: event:/NPC_Shopkeep_Idle
+  - key: event:/Chest_Close
     index: 6
---- !u!114 &938944046742920468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Seagull_Chirp_Loop
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/Seagull_Chirp_Loop
-  Guid:
-    Data1: 593792682
-    Data2: 1224104636
-    Data3: -1873818703
-    Data4: 563781533
-  Banks:
-  - {fileID: 7081430189654213316}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 10500
+  - key: event:/Ambience/Seagull_Chirp_Loop
+    index: 7
+  - key: event:/Chest_Open
+    index: 8
 --- !u!114 &1240422828708520119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,31 +273,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &2467023580310190005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/NPC_Shopkeep_Idle/Talking
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
-  Name: Talking
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 3880603076
-    data2: 3618471968
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &3179458301426420747
+--- !u!114 &1382311045689978928
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -249,9 +283,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Crashing_Waves
+  m_Name: event:/Ambience/Crashing_Waves
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/Crashing_Waves
+  Path: event:/Ambience/Crashing_Waves
   Guid:
     Data1: 882376000
     Data2: 1259249699
@@ -266,6 +300,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 132000
+--- !u!114 &1933122579779967734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Chest_Close
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Chest_Close
+  Guid:
+    Data1: -1791652502
+    Data2: 1141536477
+    Data3: 639512218
+    Data4: 537867650
+  Banks:
+  - {fileID: 7081430189654213316}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 637
+--- !u!114 &2563426846050146094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambience/Beachly_Winds
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Ambience/Beachly_Winds
+  Guid:
+    Data1: 119835431
+    Data2: 1181565793
+    Data3: -1228663403
+    Data4: -476520228
+  Banks:
+  - {fileID: 7081430189654213316}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 81000
 --- !u!114 &7081430189654213316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,12 +369,12 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Play.bank
   Name: Play
   StudioPath: bank:/Play
-  lastModified: 639114183309249325
+  lastModified: 639114262966389296
   FileSizes:
   - Name: Desktop
-    Value: 2675872
+    Value: 2691744
   Exists: 1
---- !u!114 &7315310968015382713
+--- !u!114 &9220189315384230285
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -296,48 +384,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Beachly_Winds
+  m_Name: event:/Ambience/Seagull_Chirp_Random
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/Beachly_Winds
+  Path: event:/Ambience/Seagull_Chirp_Random
   Guid:
-    Data1: 119835431
-    Data2: 1181565793
-    Data3: -1228663403
-    Data4: -476520228
+    Data1: -1999806914
+    Data2: 1195754027
+    Data3: 58804388
+    Data4: -84705727
   Banks:
   - {fileID: 7081430189654213316}
   IsStream: 1
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 81000
---- !u!114 &8061687421617743650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/NPC_Shopkeep_Idle
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/NPC_Shopkeep_Idle
-  Guid:
-    Data1: 52903518
-    Data2: 1083070084
-    Data3: -628413028
-    Data4: -996566655
-  Banks:
-  - {fileID: 7081430189654213316}
-  IsStream: 1
-  Is3D: 1
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 2467023580310190005}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 10000
+  Length: 500

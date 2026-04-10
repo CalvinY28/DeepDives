@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class ChestInteract : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class ChestInteract : MonoBehaviour
     private bool playerInRange = false;
     private bool isOpen = false;
     private Coroutine currentFade;
+
+    public EventReference openSound;
+    public EventReference closeSound;
 
     void Start()
     {
@@ -38,6 +42,7 @@ public class ChestInteract : MonoBehaviour
                 isOpen = true;
                 animator.SetBool("isOpen", true);
                 StartCoroutine(OpenMenuAfterAnimation());
+                RuntimeManager.PlayOneShot(openSound, transform.position);
             }
             else
             {
@@ -68,6 +73,8 @@ public class ChestInteract : MonoBehaviour
             {
                 isOpen = false;
                 animator.SetBool("isOpen", false);
+
+                RuntimeManager.PlayOneShot(closeSound, transform.position);
 
                 // Optional: close menu when player leaves
                 if (menuController != null)
