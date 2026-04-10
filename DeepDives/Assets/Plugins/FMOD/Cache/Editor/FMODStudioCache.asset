@@ -42,7 +42,7 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639112448639424824
+  lastModified: 639114183309013053
   FileSizes:
   - Name: Desktop
     Value: 2714
@@ -82,10 +82,10 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639112448639434829
+  lastModified: 639114183309023062
   FileSizes:
   - Name: Desktop
-    Value: 1124
+    Value: 1220
   Exists: 1
 --- !u!114 &-1956876558709381912
 MonoBehaviour:
@@ -138,13 +138,14 @@ MonoBehaviour:
   - {fileID: 3179458301426420747}
   - {fileID: -1956876558709381912}
   - {fileID: 938944046742920468}
+  - {fileID: 8061687421617743650}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5010258732884138052}
   StringsBanks:
   - {fileID: -2784358243557595788}
   cacheVersion: 131848
-  cacheTime: 639112476777442543
+  cacheTime: 639114183309249325
   SerializableEventsDict:
   - key: event:/Test_3D_Timeline
     index: 0
@@ -158,6 +159,8 @@ MonoBehaviour:
     index: 4
   - key: event:/Seagull_Chirp_Loop
     index: 5
+  - key: event:/NPC_Shopkeep_Idle
+    index: 6
 --- !u!114 &938944046742920468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,6 +215,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &2467023580310190005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/NPC_Shopkeep_Idle/Talking
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: Talking
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3880603076
+    data2: 3618471968
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &3179458301426420747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,10 +281,10 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Play.bank
   Name: Play
   StudioPath: bank:/Play
-  lastModified: 639112476777442543
+  lastModified: 639114183309249325
   FileSizes:
   - Name: Desktop
-    Value: 2578112
+    Value: 2675872
   Exists: 1
 --- !u!114 &7315310968015382713
 MonoBehaviour:
@@ -286,3 +313,31 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 81000
+--- !u!114 &8061687421617743650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/NPC_Shopkeep_Idle
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/NPC_Shopkeep_Idle
+  Guid:
+    Data1: 52903518
+    Data2: 1083070084
+    Data3: -628413028
+    Data4: -996566655
+  Banks:
+  - {fileID: 7081430189654213316}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 2467023580310190005}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 10000

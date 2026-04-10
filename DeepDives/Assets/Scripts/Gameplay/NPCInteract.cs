@@ -6,6 +6,7 @@ public class NPCInteract : MonoBehaviour
 {
     public CanvasGroup talkPromptGroup;
     public SpeechBubble speechBubble;
+    public NPCAudioController audioController;
 
     [TextArea(2, 5)]
     public string[] npcDialogueLines;
@@ -24,6 +25,9 @@ public class NPCInteract : MonoBehaviour
             else
             {
                 speechBubble.StartDialogue(npcDialogueLines);
+
+                if (audioController != null)
+                    audioController.StartTalking();
             }
         }
     }
@@ -44,6 +48,9 @@ public class NPCInteract : MonoBehaviour
             playerInRange = false;
             StartFade(0f);
             speechBubble.EndDialogue();
+
+            if (audioController != null)
+                audioController.StopTalking();
         }
     }
 
