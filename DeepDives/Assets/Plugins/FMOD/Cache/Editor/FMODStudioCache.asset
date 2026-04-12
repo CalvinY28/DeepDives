@@ -257,7 +257,7 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639116062125488015
+  lastModified: 639116066308873859
   FileSizes:
   - Name: Desktop
     Value: 7648
@@ -324,11 +324,38 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639116062125498018
+  lastModified: 639116066308893859
   FileSizes:
   - Name: Desktop
-    Value: 1854
+    Value: 1946
   Exists: 1
+--- !u!114 &-591507981713323376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Character/NPC_Shopkeep_Line2
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Character/NPC_Shopkeep_Line2
+  Guid:
+    Data1: -972159301
+    Data2: 1236401507
+    Data3: -1565600839
+    Data4: 2030436065
+  Banks:
+  - {fileID: 7081430189654213316}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
 --- !u!114 &-23262390599023115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,13 +419,15 @@ MonoBehaviour:
   - {fileID: 3026561421143758160}
   - {fileID: -7866791100624699138}
   - {fileID: 5511701424900829652}
+  - {fileID: 1025204783295191456}
+  - {fileID: -591507981713323376}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5010258732884138052}
   StringsBanks:
   - {fileID: -2784358243557595788}
   cacheVersion: 131848
-  cacheTime: 639116062125498018
+  cacheTime: 639116068761331075
   SerializableEventsDict:
   - key: event:/Test_3D_Timeline
     index: 0
@@ -436,6 +465,10 @@ MonoBehaviour:
     index: 16
   - key: snapshot:/Underwater
     index: 17
+  - key: event:/Character/NPC_Shopkeep_Line1
+    index: 18
+  - key: event:/Character/NPC_Shopkeep_Line2
+    index: 19
 --- !u!114 &38012706467985344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -489,6 +522,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 500
+--- !u!114 &1025204783295191456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Character/NPC_Shopkeep_Line1
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Character/NPC_Shopkeep_Line1
+  Guid:
+    Data1: 639786077
+    Data2: 1156811403
+    Data3: 468258718
+    Data4: 450717076
+  Banks:
+  - {fileID: 7081430189654213316}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
 --- !u!114 &1240422828708520119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -666,10 +726,10 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Play.bank
   Name: Play
   StudioPath: bank:/Play
-  lastModified: 639116058105809307
+  lastModified: 639116068761331075
   FileSizes:
   - Name: Desktop
-    Value: 2889376
+    Value: 2919584
   Exists: 1
 --- !u!114 &9220189315384230285
 MonoBehaviour:
