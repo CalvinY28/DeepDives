@@ -133,6 +133,33 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &-5606198213150162690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Player_Swim
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/SFX/Player_Swim
+  Guid:
+    Data1: -559375920
+    Data2: 1310892323
+    Data3: -1925889634
+    Data4: -1153891065
+  Banks:
+  - {fileID: 7081430189654213316}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1000
 --- !u!114 &-5436378022489554315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +203,7 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639115858910940403
+  lastModified: 639115895102728926
   FileSizes:
   - Name: Desktop
     Value: 2714
@@ -243,10 +270,10 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639115858910950229
+  lastModified: 639115895102738923
   FileSizes:
   - Name: Desktop
-    Value: 1558
+    Value: 1594
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -278,13 +305,14 @@ MonoBehaviour:
   - {fileID: 1814055432830336315}
   - {fileID: -8816410300425538843}
   - {fileID: 155893702106083380}
+  - {fileID: -5606198213150162690}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5010258732884138052}
   StringsBanks:
   - {fileID: -2784358243557595788}
   cacheVersion: 131848
-  cacheTime: 639115860981551969
+  cacheTime: 639115896138307071
   SerializableEventsDict:
   - key: event:/Test_3D_Timeline
     index: 0
@@ -310,6 +338,8 @@ MonoBehaviour:
     index: 10
   - key: event:/SFX/Player_Jump
     index: 11
+  - key: event:/SFX/Player_Swim
+    index: 12
 --- !u!114 &38012706467985344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,10 +516,10 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Play.bank
   Name: Play
   StudioPath: bank:/Play
-  lastModified: 639115860981551969
+  lastModified: 639115896138307071
   FileSizes:
   - Name: Desktop
-    Value: 2725376
+    Value: 2748832
   Exists: 1
 --- !u!114 &9220189315384230285
 MonoBehaviour:

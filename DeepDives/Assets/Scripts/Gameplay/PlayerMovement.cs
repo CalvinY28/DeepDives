@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("FMOD Player Jump/Swim")]
     public EventReference playerJump;
-    //public EventReference playerSwim;
+    public EventReference playerSwim;
 
     void Start()
     {
@@ -82,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetButtonDown("Jump"))
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, swimUpForce);
-                //RuntimeManager.PlayOneShot(playerSwim, transform.position);
+                RuntimeManager.PlayOneShot(playerSwim, transform.position);
             }
         }
         else
