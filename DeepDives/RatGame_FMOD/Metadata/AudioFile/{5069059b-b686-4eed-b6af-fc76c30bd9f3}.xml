@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{5069059b-b686-4eed-b6af-fc76c30bd9f3}">
+		<property name="assetPath">
+			<value>Bubbles.ogg</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>10.5</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a50e9a3e-ed83-4113-88b0-f99d4047e002}</destination>
+		</relationship>
+	</object>
+</objects>

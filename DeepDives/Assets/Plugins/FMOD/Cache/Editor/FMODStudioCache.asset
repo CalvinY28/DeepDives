@@ -55,6 +55,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 10500
+--- !u!114 &-7866791100624699138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambience/Bubbles
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Ambience/Bubbles
+  Guid:
+    Data1: 1696954295
+    Data2: 1194130312
+    Data3: -1101619071
+    Data4: 808065221
+  Banks:
+  - {fileID: 7081430189654213316}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 10500
 --- !u!114 &-7462243725006178485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,7 +257,7 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639116015938477877
+  lastModified: 639116045616887823
   FileSizes:
   - Name: Desktop
     Value: 6176
@@ -297,10 +324,10 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639116015938487890
+  lastModified: 639116045616907833
   FileSizes:
   - Name: Desktop
-    Value: 1678
+    Value: 1726
   Exists: 1
 --- !u!114 &-23262390599023115
 MonoBehaviour:
@@ -363,13 +390,14 @@ MonoBehaviour:
   - {fileID: -7462243725006178485}
   - {fileID: -23262390599023115}
   - {fileID: 3026561421143758160}
+  - {fileID: -7866791100624699138}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5010258732884138052}
   StringsBanks:
   - {fileID: -2784358243557595788}
   cacheVersion: 131848
-  cacheTime: 639116015944766797
+  cacheTime: 639116052343459687
   SerializableEventsDict:
   - key: event:/Test_3D_Timeline
     index: 0
@@ -403,6 +431,8 @@ MonoBehaviour:
     index: 14
   - key: event:/Music/Menu
     index: 15
+  - key: event:/Ambience/Bubbles
+    index: 16
 --- !u!114 &38012706467985344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -606,10 +636,10 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Play.bank
   Name: Play
   StudioPath: bank:/Play
-  lastModified: 639115896138307071
+  lastModified: 639116052343459687
   FileSizes:
   - Name: Desktop
-    Value: 2748832
+    Value: 2889376
   Exists: 1
 --- !u!114 &9220189315384230285
 MonoBehaviour:
