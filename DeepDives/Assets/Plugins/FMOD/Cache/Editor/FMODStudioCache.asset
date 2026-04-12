@@ -176,7 +176,7 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639114340418334137
+  lastModified: 639115858910940403
   FileSizes:
   - Name: Desktop
     Value: 2714
@@ -243,10 +243,10 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639114340418344139
+  lastModified: 639115858910950229
   FileSizes:
   - Name: Desktop
-    Value: 1512
+    Value: 1558
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -277,13 +277,14 @@ MonoBehaviour:
   - {fileID: -4519031068907032255}
   - {fileID: 1814055432830336315}
   - {fileID: -8816410300425538843}
+  - {fileID: 155893702106083380}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5010258732884138052}
   StringsBanks:
   - {fileID: -2784358243557595788}
   cacheVersion: 131848
-  cacheTime: 639114456230999139
+  cacheTime: 639115860981551969
   SerializableEventsDict:
   - key: event:/Test_3D_Timeline
     index: 0
@@ -307,6 +308,8 @@ MonoBehaviour:
     index: 9
   - key: event:/SFX/Player_Footsteps
     index: 10
+  - key: event:/SFX/Player_Jump
+    index: 11
 --- !u!114 &38012706467985344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,6 +336,33 @@ MonoBehaviour:
   - Wood
   - Sand
   Exists: 1
+--- !u!114 &155893702106083380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Player_Jump
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/SFX/Player_Jump
+  Guid:
+    Data1: 1994324099
+    Data2: 1288217727
+    Data3: 1881738885
+    Data4: 1467127130
+  Banks:
+  - {fileID: 7081430189654213316}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
 --- !u!114 &1240422828708520119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,10 +486,10 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Play.bank
   Name: Play
   StudioPath: bank:/Play
-  lastModified: 639114456230999139
+  lastModified: 639115860981551969
   FileSizes:
   - Name: Desktop
-    Value: 2722464
+    Value: 2725376
   Exists: 1
 --- !u!114 &9220189315384230285
 MonoBehaviour:

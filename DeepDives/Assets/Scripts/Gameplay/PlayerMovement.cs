@@ -39,6 +39,10 @@ public class PlayerMovement : MonoBehaviour
 
     private float footstepTimer = 0f;
 
+    [Header("FMOD Player Jump/Swim")]
+    public EventReference playerJump;
+    //public EventReference playerSwim;
+
     void Start()
     {
         playerCollider = GetComponent<Collider2D>();
@@ -78,6 +82,7 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetButtonDown("Jump"))
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, swimUpForce);
+                //RuntimeManager.PlayOneShot(playerSwim, transform.position);
             }
         }
         else
@@ -87,6 +92,7 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetButtonDown("Jump") && isGrounded)
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+                RuntimeManager.PlayOneShot(playerJump, transform.position);
             }
         }
 
