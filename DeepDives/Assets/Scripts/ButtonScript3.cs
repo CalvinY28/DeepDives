@@ -41,7 +41,6 @@ public class ButtonScript3 : MonoBehaviour
         // Activate button
         if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.Return))
         {
-            RuntimeManager.PlayOneShot(Click, transform.position);
             buttons[currentIndex].onClick.Invoke(); // Trigger the button's OnClick event
         }
     }

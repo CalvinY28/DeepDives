@@ -230,7 +230,7 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639115933190334437
+  lastModified: 639116015938477877
   FileSizes:
   - Name: Desktop
     Value: 6176
@@ -277,10 +277,10 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Menu.bank
   Name: Menu
   StudioPath: bank:/Menu
-  lastModified: 639112423245785588
+  lastModified: 639116015944766797
   FileSizes:
   - Name: Desktop
-    Value: 506
+    Value: 474432
   Exists: 1
 --- !u!114 &-2784358243557595788
 MonoBehaviour:
@@ -297,10 +297,10 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639115933190344436
+  lastModified: 639116015938487890
   FileSizes:
   - Name: Desktop
-    Value: 1636
+    Value: 1678
   Exists: 1
 --- !u!114 &-23262390599023115
 MonoBehaviour:
@@ -362,13 +362,14 @@ MonoBehaviour:
   - {fileID: -5606198213150162690}
   - {fileID: -7462243725006178485}
   - {fileID: -23262390599023115}
+  - {fileID: 3026561421143758160}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5010258732884138052}
   StringsBanks:
   - {fileID: -2784358243557595788}
   cacheVersion: 131848
-  cacheTime: 639115933190344436
+  cacheTime: 639116015944766797
   SerializableEventsDict:
   - key: event:/Test_3D_Timeline
     index: 0
@@ -400,6 +401,8 @@ MonoBehaviour:
     index: 13
   - key: event:/UI/UI_Click
     index: 14
+  - key: event:/Music/Menu
+    index: 15
 --- !u!114 &38012706467985344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -561,6 +564,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 81000
+--- !u!114 &3026561421143758160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Menu
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Music/Menu
+  Guid:
+    Data1: -1283965418
+    Data2: 1096707549
+    Data3: -489369426
+    Data4: -1910125187
+  Banks:
+  - {fileID: -3392874532701532941}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 59500
 --- !u!114 &7081430189654213316
 MonoBehaviour:
   m_ObjectHideFlags: 0
