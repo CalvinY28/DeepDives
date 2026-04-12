@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="MixerGroup" id="{b7a781a0-68a5-411f-a04f-794c4ad4b8e7}">
+		<property name="name">
+			<value>Everything that changes underwater</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{0f5eb57f-85fe-49a0-866c-10d544a509c3}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{70dccb79-36c7-4ebb-9bec-a95bce34885c}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{573f6631-19e7-4f00-9703-6c61c0371838}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{0f5eb57f-85fe-49a0-866c-10d544a509c3}">
+		<relationship name="effects">
+			<destination>{e2c956ec-ca1a-491f-a23a-fb302e6fc818}</destination>
+			<destination>{1329e877-729d-4334-9bc1-d0ab72d5f239}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{70dccb79-36c7-4ebb-9bec-a95bce34885c}" />
+	<object class="ThreeEQEffect" id="{e2c956ec-ca1a-491f-a23a-fb302e6fc818}" />
+	<object class="MixerBusFader" id="{1329e877-729d-4334-9bc1-d0ab72d5f239}" />
+</objects>

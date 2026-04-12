@@ -257,10 +257,10 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639116045616887823
+  lastModified: 639116062125488015
   FileSizes:
   - Name: Desktop
-    Value: 6176
+    Value: 7648
   Exists: 1
 --- !u!114 &-4519031068907032255
 MonoBehaviour:
@@ -304,7 +304,7 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Menu.bank
   Name: Menu
   StudioPath: bank:/Menu
-  lastModified: 639116015944766797
+  lastModified: 639116058105429211
   FileSizes:
   - Name: Desktop
     Value: 474432
@@ -324,10 +324,10 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639116045616907833
+  lastModified: 639116062125498018
   FileSizes:
   - Name: Desktop
-    Value: 1726
+    Value: 1854
   Exists: 1
 --- !u!114 &-23262390599023115
 MonoBehaviour:
@@ -391,13 +391,14 @@ MonoBehaviour:
   - {fileID: -23262390599023115}
   - {fileID: 3026561421143758160}
   - {fileID: -7866791100624699138}
+  - {fileID: 5511701424900829652}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5010258732884138052}
   StringsBanks:
   - {fileID: -2784358243557595788}
   cacheVersion: 131848
-  cacheTime: 639116052343459687
+  cacheTime: 639116062125498018
   SerializableEventsDict:
   - key: event:/Test_3D_Timeline
     index: 0
@@ -433,6 +434,8 @@ MonoBehaviour:
     index: 15
   - key: event:/Ambience/Bubbles
     index: 16
+  - key: snapshot:/Underwater
+    index: 17
 --- !u!114 &38012706467985344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,6 +624,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 59500
+--- !u!114 &5511701424900829652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: snapshot:/Underwater
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: snapshot:/Underwater
+  Guid:
+    Data1: 1963400899
+    Data2: 1209879012
+    Data3: -2078456175
+    Data4: -450904443
+  Banks:
+  - {fileID: -5010258732884138052}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
 --- !u!114 &7081430189654213316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -636,7 +666,7 @@ MonoBehaviour:
   Path: RatGame_FMOD/Build/Desktop/Play.bank
   Name: Play
   StudioPath: bank:/Play
-  lastModified: 639116052343459687
+  lastModified: 639116058105809307
   FileSizes:
   - Name: Desktop
     Value: 2889376

@@ -44,8 +44,13 @@ public class PlayerMovement : MonoBehaviour
     public EventReference playerJump;
     public EventReference playerSwim;
 
+    [Header("underwater filter")]
+    public EventReference snapshotEvent;
+    private EventInstance snapshotInstance;
+
     void Start()
     {
+        snapshotInstance = RuntimeManager.CreateInstance(snapshotEvent);
         playerCollider = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
 
@@ -135,6 +140,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 playerCollider.sharedMaterial = waterMaterial;
             }
+            snapshotInstance.start();
         }
     }
 
@@ -150,6 +156,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 playerCollider.sharedMaterial = landMaterial;
             }
+            snapshotInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
     }
 
