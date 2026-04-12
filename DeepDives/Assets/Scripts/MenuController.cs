@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
 using FMODUnity;
+using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
@@ -78,6 +79,14 @@ public class MenuController : MonoBehaviour
 
         gameObject.SetActive(active);
         UpdateVisuals();
+    }
+
+    public void ReturnToMainMenu()
+    {
+        Time.timeScale = 1;
+        openMenu = null;
+        isActive = false;
+        SceneManager.LoadScene("StartScene");
     }
 
     void UpdateVisuals()

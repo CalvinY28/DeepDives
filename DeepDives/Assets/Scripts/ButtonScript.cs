@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
+using FMODUnity;
 
 public class ButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public TextMeshProUGUI buttonText; // Replace with TextMeshProUGUI
     public Color highlightColor = Color.yellow; // Color when highlighted
     private Color originalColor; // To store the original color of the text
+
+    public EventReference Click;
+    public EventReference Select;
 
     void Start()
     {
@@ -25,6 +29,7 @@ public class ButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        RuntimeManager.PlayOneShot(Select, transform.position);
         Debug.Log("ww");
         if (buttonText != null)
         {

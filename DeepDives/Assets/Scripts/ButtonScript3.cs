@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using FMODUnity;
+
 
 public class ButtonScript3 : MonoBehaviour
 {
@@ -10,6 +12,9 @@ public class ButtonScript3 : MonoBehaviour
     private int currentIndex = 0; // Track the currently selected button
     public Color highlightColor = Color.yellow;
     public Color defaultColor = Color.white;
+
+    public EventReference Click;
+    public EventReference Select;
 
     private void Start()
     {
@@ -22,11 +27,13 @@ public class ButtonScript3 : MonoBehaviour
         // Navigate through buttons
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
+            RuntimeManager.PlayOneShot(Select, transform.position);
             currentIndex = (currentIndex - 1 + buttons.Length) % buttons.Length; // Move up
             UpdateButtonHighlight();
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
+            RuntimeManager.PlayOneShot(Select, transform.position);
             currentIndex = (currentIndex + 1) % buttons.Length; // Move down
             UpdateButtonHighlight();
         }
@@ -34,6 +41,7 @@ public class ButtonScript3 : MonoBehaviour
         // Activate button
         if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.Return))
         {
+            RuntimeManager.PlayOneShot(Click, transform.position);
             buttons[currentIndex].onClick.Invoke(); // Trigger the button's OnClick event
         }
     }
