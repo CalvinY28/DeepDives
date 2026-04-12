@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
+using FMODUnity;
 
 public class MenuController : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class MenuController : MonoBehaviour
     private static MenuController openMenu;
     private int currentIndex = 0;
     private bool isActive = false;
+
+    public EventReference Click;
+    public EventReference Select;
 
     void OnEnable() // On enable to make it always be the top option
     {
@@ -39,16 +43,19 @@ public class MenuController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
+            RuntimeManager.PlayOneShot(Select, transform.position);
             currentIndex = (currentIndex + 1) % options.Count;
             UpdateVisuals();
         }
         else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
+            RuntimeManager.PlayOneShot(Select, transform.position);
             currentIndex = (currentIndex - 1 + options.Count) % options.Count;
             UpdateVisuals();
         }
         else if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Z))
         {
+            RuntimeManager.PlayOneShot(Click, transform.position);
             options[currentIndex].onSelect.Invoke();
         }
     }
@@ -57,6 +64,7 @@ public class MenuController : MonoBehaviour
     {
         if (active)
         {
+            RuntimeManager.PlayOneShot(Select, transform.position);
             if (openMenu != null && openMenu != this) return;
             openMenu = this;
         }

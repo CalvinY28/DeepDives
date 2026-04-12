@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private float moveInput;
     private bool isGrounded;
     private bool isSwimming;
+    private bool wasSwimming;
     private float currentVelocityX;
     private Collider2D playerCollider;
 
@@ -75,8 +76,14 @@ public class PlayerMovement : MonoBehaviour
         currentVelocityX = Mathf.Lerp(currentVelocityX, targetVelocityX, Time.deltaTime * lerpSpeed);
 
         // Handle vertical movement
+        bool startedSwimming = isSwimming && !wasSwimming;
+
         if (isSwimming)
         {
+            if (startedSwimming)
+            {
+                RuntimeManager.PlayOneShot(playerSwim, transform.position);
+            }
             rb.linearVelocity = new Vector2(currentVelocityX, rb.linearVelocity.y);
 
             if (Input.GetButtonDown("Jump"))
@@ -95,6 +102,7 @@ public class PlayerMovement : MonoBehaviour
                 RuntimeManager.PlayOneShot(playerJump, transform.position);
             }
         }
+        wasSwimming = isSwimming;
 
         if (anim != null)
         {
