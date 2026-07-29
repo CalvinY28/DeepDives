@@ -1,103 +1,181 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using FMODUnity;
+using UnityEngine;
 
 public class NPCInteract : MonoBehaviour
 {
     public CanvasGroup talkPromptGroup;
     public SpeechBubble speechBubble;
     public NPCAudioController audioController;
+    public ShopController shopController;
 
     [TextArea(2, 5)]
     public string[] npcDialogueLines;
 
-    private bool playerInRange = false;
-    private Coroutine currentFade;
-    private int currentLineIndex = 0;
+    [TextArea(2, 5)]
+    public string[] repeatDialogueLines;
 
     public EventReference Line1;
     public EventReference Line2;
+    public EventReference[] repeatVoiceLines;
 
-    void Update()
+    private bool playerInRange;
+    private bool hasCompletedConversation;
+    private bool usingRepeatDialogue;
+    private Coroutine currentFade;
+
+    private void Awake()
     {
-        if (playerInRange && Input.GetKeyDown(KeyCode.Z))
-        {
-            if (speechBubble.IsActive())
-            {
-                currentLineIndex++;
-                speechBubble.AdvanceDialogue();
-                PlayCurrentVoiceLine();
-            }
-            else
-            {
-                currentLineIndex = 0;
-                speechBubble.StartDialogue(npcDialogueLines);
-
-                if (audioController != null)
-                    audioController.StartTalking();
-
-                PlayCurrentVoiceLine();
-            }
-        }
+        if (shopController == null)
+            shopController = GetComponent<ShopController>();
     }
-    void PlayCurrentVoiceLine()
+
+    private void OnEnable()
     {
-        if (currentLineIndex == 0)
+        if (speechBubble != null)
         {
+            speechBubble.LineStarted += HandleLineStarted;
+            speechBubble.DialogueCompleted += HandleDialogueCompleted;
+        }
+
+        if (shopController != null)
+            shopController.Closed += HandleShopClosed;
+    }
+
+    private void OnDisable()
+    {
+        if (speechBubble != null)
+        {
+            speechBubble.LineStarted -= HandleLineStarted;
+            speechBubble.DialogueCompleted -= HandleDialogueCompleted;
+        }
+
+        if (shopController != null)
+            shopController.Closed -= HandleShopClosed;
+    }
+
+    private void Update()
+    {
+        if (!playerInRange || speechBubble == null || !Input.GetKeyDown(KeyCode.Z))
+            return;
+
+        if (shopController != null && shopController.IsOpen)
+            return;
+
+        if (speechBubble.IsActive())
+            speechBubble.AdvanceDialogue();
+        else
+            StartConversation();
+    }
+
+    private void StartConversation()
+    {
+        usingRepeatDialogue = hasCompletedConversation &&
+                              repeatDialogueLines != null &&
+                              repeatDialogueLines.Length > 0;
+
+        string[] dialogue = usingRepeatDialogue ? repeatDialogueLines : npcDialogueLines;
+        StartFade(0f);
+
+        if (audioController != null)
+            audioController.StartTalking();
+
+        speechBubble.StartDialogue(dialogue);
+    }
+
+    private void HandleLineStarted(int lineIndex)
+    {
+        if (usingRepeatDialogue)
+        {
+            if (repeatVoiceLines != null && lineIndex < repeatVoiceLines.Length)
+                RuntimeManager.PlayOneShot(repeatVoiceLines[lineIndex], transform.position);
+
+            return;
+        }
+
+        if (lineIndex == 0)
             RuntimeManager.PlayOneShot(Line1, transform.position);
-        }
-        else if (currentLineIndex == 1)
-        {
+        else if (lineIndex == 1)
             RuntimeManager.PlayOneShot(Line2, transform.position);
-        }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void HandleDialogueCompleted()
     {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = true;
+        hasCompletedConversation = true;
+        usingRepeatDialogue = false;
+        StartFade(0f);
+
+        if (audioController != null)
+            audioController.StopTalking();
+
+        if (shopController != null)
+            shopController.OpenShop();
+        else if (playerInRange)
             StartFade(1f);
-        }
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    private void HandleShopClosed()
     {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = false;
-            StartFade(0f);
+        if (playerInRange)
+            StartFade(1f);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!other.CompareTag("Player"))
+            return;
+
+        playerInRange = true;
+
+        if (shopController == null || !shopController.IsOpen)
+            StartFade(1f);
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (!other.CompareTag("Player"))
+            return;
+
+        playerInRange = false;
+        StartFade(0f);
+
+        if (speechBubble != null)
             speechBubble.EndDialogue();
 
-            if (audioController != null)
-                audioController.StopTalking();
+        if (audioController != null)
+            audioController.StopTalking();
 
-            currentLineIndex = 0;
-        }
+        if (shopController != null)
+            shopController.CloseShop();
+
+        usingRepeatDialogue = false;
     }
 
-    void StartFade(float targetAlpha)
+    private void StartFade(float targetAlpha)
     {
+        if (talkPromptGroup == null)
+            return;
+
         if (currentFade != null)
             StopCoroutine(currentFade);
 
-        currentFade = StartCoroutine(FadeCanvasGroup(talkPromptGroup, targetAlpha));
+        currentFade = StartCoroutine(FadeCanvasGroup(targetAlpha));
     }
 
-    System.Collections.IEnumerator FadeCanvasGroup(CanvasGroup canvasGroup, float targetAlpha)
+    private IEnumerator FadeCanvasGroup(float targetAlpha)
     {
-        float startAlpha = canvasGroup.alpha;
+        const float fadeDuration = 0.3f;
+        float startAlpha = talkPromptGroup.alpha;
         float time = 0f;
-        float fadeDuration = 0.3f;
 
         while (time < fadeDuration)
         {
-            canvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, time / fadeDuration);
-            time += Time.deltaTime;
+            talkPromptGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, time / fadeDuration);
+            time += Time.unscaledDeltaTime;
             yield return null;
         }
 
-        canvasGroup.alpha = targetAlpha;
+        talkPromptGroup.alpha = targetAlpha;
+        currentFade = null;
     }
 }
