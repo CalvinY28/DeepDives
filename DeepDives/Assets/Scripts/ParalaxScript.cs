@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ParalaxScript : MonoBehaviour
@@ -11,36 +9,61 @@ public class ParalaxScript : MonoBehaviour
     public Vector2 maxPosition;
 
     private Vector3 startPosition;
+    private Vector3 lastCameraPosition;
+    private bool hasCameraPosition;
 
-    void Start()
+    private void Start()
     {
         if (cameraTransform == null)
         {
-            Camera cam = GameObject.FindObjectOfType<Camera>();
-            if (cam != null)
-                cameraTransform = cam.transform;
-            else
-                Debug.LogWarning("No camera found in scene!");
+            Camera sceneCamera = Camera.main;
+            if (sceneCamera == null)
+                sceneCamera = FindFirstObjectByType<Camera>();
+
+            if (sceneCamera != null)
+                cameraTransform = sceneCamera.transform;
+        }
+
+        if (cameraTransform == null)
+        {
+            Debug.LogWarning("No camera found in scene.", this);
+            enabled = false;
+            return;
         }
 
         startPosition = transform.position;
+        UpdateParallaxPosition();
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
-        if (cameraTransform == null) return;
+        if (cameraTransform == null)
+        {
+            enabled = false;
+            return;
+        }
 
-        Vector3 cameraDelta = cameraTransform.position;
-        Vector3 targetPos = new Vector3(
-            startPosition.x + cameraDelta.x * parallaxFactor,
-            startPosition.y + cameraDelta.y * parallaxFactor,
-            transform.position.z
+        if (hasCameraPosition && cameraTransform.position == lastCameraPosition)
+            return;
+
+        UpdateParallaxPosition();
+    }
+
+    private void UpdateParallaxPosition()
+    {
+        Vector3 cameraPosition = cameraTransform.position;
+        lastCameraPosition = cameraPosition;
+        hasCameraPosition = true;
+
+        Vector3 targetPosition = new Vector3(
+            startPosition.x + cameraPosition.x * parallaxFactor,
+            startPosition.y + cameraPosition.y * parallaxFactor,
+            startPosition.z
         );
 
-        // Clamp the position to stay within limits
-        targetPos.x = Mathf.Clamp(targetPos.x, minPosition.x, maxPosition.x);
-        targetPos.y = Mathf.Clamp(targetPos.y, minPosition.y, maxPosition.y);
+        targetPosition.x = Mathf.Clamp(targetPosition.x, minPosition.x, maxPosition.x);
+        targetPosition.y = Mathf.Clamp(targetPosition.y, minPosition.y, maxPosition.y);
 
-        transform.position = targetPos;
+        transform.position = targetPosition;
     }
 }

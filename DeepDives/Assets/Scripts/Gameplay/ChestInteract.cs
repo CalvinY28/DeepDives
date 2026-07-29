@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using FMODUnity;
+using UnityEngine;
 
 public class ChestInteract : MonoBehaviour
 {
@@ -11,14 +10,18 @@ public class ChestInteract : MonoBehaviour
     [Header("Header for menucontroller")]
     public MenuController menuController;
 
-    private bool playerInRange = false;
-    private bool isOpen = false;
+    private static readonly int IsOpenHash = Animator.StringToHash("isOpen");
+    private static readonly int ChestOpenHash = Animator.StringToHash("ChestOpen");
+    private static readonly int ChestCloseHash = Animator.StringToHash("ChestClose");
+
+    private bool playerInRange;
+    private bool isOpen;
     private Coroutine currentFade;
 
     public EventReference openSound;
     public EventReference closeSound;
 
-    void Start()
+    private void Start()
     {
         if (promptGroup != null)
             promptGroup.alpha = 0f;
@@ -27,88 +30,90 @@ public class ChestInteract : MonoBehaviour
             menuController.gameObject.SetActive(false);
     }
 
-    void Update()
+    private void Update()
     {
-        if (!playerInRange || animator == null)
+        if (!playerInRange || animator == null || !Input.GetKeyDown(KeyCode.Z))
             return;
 
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        bool isBusy = stateInfo.IsName("ChestOpen") || stateInfo.IsName("ChestClose");
+        bool isBusy = stateInfo.shortNameHash == ChestOpenHash || stateInfo.shortNameHash == ChestCloseHash;
+        if (isBusy)
+            return;
 
-        if (!isBusy && Input.GetKeyDown(KeyCode.Z))
+        if (!isOpen)
         {
-            if (!isOpen)
-            {
-                isOpen = true;
-                animator.SetBool("isOpen", true);
-                StartCoroutine(OpenMenuAfterAnimation());
-                RuntimeManager.PlayOneShot(openSound, transform.position);
-            }
-            else
-            {
-                if (menuController != null)
-                    menuController.ActivateMenu(true);
-            }
+            isOpen = true;
+            animator.SetBool(IsOpenHash, true);
+            StartCoroutine(OpenMenuAfterAnimation());
+            RuntimeManager.PlayOneShot(openSound, transform.position);
+        }
+        else if (menuController != null)
+        {
+            menuController.ActivateMenu(true);
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = true;
-            StartFade(1f);
-        }
+        if (!other.CompareTag("Player"))
+            return;
+
+        playerInRange = true;
+        StartFade(1f);
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = false;
-            StartFade(0f);
+        if (!other.CompareTag("Player"))
+            return;
 
-            if (isOpen)
-            {
-                isOpen = false;
-                animator.SetBool("isOpen", false);
+        playerInRange = false;
+        StartFade(0f);
 
-                RuntimeManager.PlayOneShot(closeSound, transform.position);
+        if (!isOpen)
+            return;
 
-                if (menuController != null)
-                    menuController.ActivateMenu(false);
-            }
-        }
+        isOpen = false;
+        if (animator != null)
+            animator.SetBool(IsOpenHash, false);
+
+        RuntimeManager.PlayOneShot(closeSound, transform.position);
+
+        if (menuController != null)
+            menuController.ActivateMenu(false);
     }
 
-    void StartFade(float targetAlpha)
+    private void StartFade(float targetAlpha)
     {
+        if (promptGroup == null)
+            return;
+
         if (currentFade != null)
             StopCoroutine(currentFade);
 
-        currentFade = StartCoroutine(FadeCanvasGroup(promptGroup, targetAlpha));
+        currentFade = StartCoroutine(FadeCanvasGroup(targetAlpha));
     }
 
-    IEnumerator FadeCanvasGroup(CanvasGroup canvasGroup, float targetAlpha)
+    private IEnumerator FadeCanvasGroup(float targetAlpha)
     {
-        float startAlpha = canvasGroup.alpha;
+        const float fadeDuration = 0.3f;
+        float startAlpha = promptGroup.alpha;
         float time = 0f;
-        float fadeDuration = 0.3f;
 
         while (time < fadeDuration)
         {
-            canvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, time / fadeDuration);
+            promptGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, time / fadeDuration);
             time += Time.deltaTime;
             yield return null;
         }
 
-        canvasGroup.alpha = targetAlpha;
+        promptGroup.alpha = targetAlpha;
+        currentFade = null;
     }
 
-    IEnumerator OpenMenuAfterAnimation()
+    private IEnumerator OpenMenuAfterAnimation()
     {
-        // Wait until the ChestOpen animation is done
-        yield return new WaitUntil(() => !animator.GetCurrentAnimatorStateInfo(0).IsName("ChestOpen"));
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).shortNameHash != ChestOpenHash);
 
         if (menuController != null)
         {
@@ -116,6 +121,6 @@ public class ChestInteract : MonoBehaviour
             menuController.ActivateMenu(true);
         }
 
-        StartFade(0f); // Hide prompt
+        StartFade(0f);
     }
 }

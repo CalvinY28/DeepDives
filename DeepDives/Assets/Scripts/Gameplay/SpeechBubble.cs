@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -11,21 +10,27 @@ public class SpeechBubble : MonoBehaviour
     public float soundCooldown = 0.02f;
 
     private string[] dialogueLines;
-    private int currentLineIndex = 0;
-    private bool isActive = false;
-    private bool isTyping = false;
+    private int currentLineIndex;
+    private bool isActive;
+    private bool isTyping;
     private Coroutine typingCoroutine;
 
     private AudioSource audioSource;
     private float lastSoundTime;
 
-    void Awake()
+    private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
     }
 
     public void StartDialogue(string[] lines)
     {
+        if (lines == null || lines.Length == 0 || speechText == null)
+        {
+            EndDialogue();
+            return;
+        }
+
         dialogueLines = lines;
         currentLineIndex = 0;
         isActive = true;
@@ -35,27 +40,24 @@ public class SpeechBubble : MonoBehaviour
 
     public void AdvanceDialogue()
     {
-        if (!isActive) return;
+        if (!isActive)
+            return;
 
         if (isTyping)
         {
             StopCoroutine(typingCoroutine);
-            speechText.text = dialogueLines[currentLineIndex];
+            typingCoroutine = null;
+            speechText.maxVisibleCharacters = int.MaxValue;
             isTyping = false;
+            return;
         }
-        else
-        {
-            currentLineIndex++;
 
-            if (currentLineIndex < dialogueLines.Length)
-            {
-                ShowCurrentLine();
-            }
-            else
-            {
-                EndDialogue();
-            }
-        }
+        currentLineIndex++;
+
+        if (currentLineIndex < dialogueLines.Length)
+            ShowCurrentLine();
+        else
+            EndDialogue();
     }
 
     private void ShowCurrentLine()
@@ -63,39 +65,52 @@ public class SpeechBubble : MonoBehaviour
         if (typingCoroutine != null)
             StopCoroutine(typingCoroutine);
 
-        typingCoroutine = StartCoroutine(TypeLine(dialogueLines[currentLineIndex]));
+        speechText.text = dialogueLines[currentLineIndex];
+        speechText.maxVisibleCharacters = 0;
+        speechText.ForceMeshUpdate();
+        typingCoroutine = StartCoroutine(TypeLine());
     }
 
-    private IEnumerator TypeLine(string line)
+    private IEnumerator TypeLine()
     {
         isTyping = true;
-        speechText.text = "";
         lastSoundTime = 0f;
 
-        foreach (char letter in line.ToCharArray())
-        {
-            speechText.text += letter;
+        int characterCount = speechText.textInfo.characterCount;
+        WaitForSeconds delay = new WaitForSeconds(typingSpeed);
 
-            if (typingSound != null && Time.time - lastSoundTime > soundCooldown)
+        for (int visibleCharacters = 1; visibleCharacters <= characterCount; visibleCharacters++)
+        {
+            speechText.maxVisibleCharacters = visibleCharacters;
+
+            if (typingSound != null && audioSource != null && Time.time - lastSoundTime > soundCooldown)
             {
                 audioSource.PlayOneShot(typingSound);
                 lastSoundTime = Time.time;
             }
 
-            yield return new WaitForSeconds(typingSpeed);
+            yield return delay;
         }
 
+        speechText.maxVisibleCharacters = int.MaxValue;
         isTyping = false;
+        typingCoroutine = null;
     }
 
     public void EndDialogue()
     {
         if (typingCoroutine != null)
+        {
             StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+        }
 
-        gameObject.SetActive(false);
+        if (speechText != null)
+            speechText.maxVisibleCharacters = int.MaxValue;
+
         isActive = false;
         isTyping = false;
+        gameObject.SetActive(false);
     }
 
     public bool IsActive()
