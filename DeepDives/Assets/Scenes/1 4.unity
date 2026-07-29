@@ -9783,6 +9783,7 @@ GameObject:
   - component: {fileID: 736006246}
   - component: {fileID: 736006247}
   - component: {fileID: 736006248}
+  - component: {fileID: 736006249}
   m_Layer: 0
   m_Name: ShopKeep
   m_TagString: Untagged
@@ -9859,9 +9860,13 @@ MonoBehaviour:
   talkPromptGroup: {fileID: 1175783713}
   speechBubble: {fileID: 1797984907}
   audioController: {fileID: 737008409}
+  shopController: {fileID: 736006249}
   npcDialogueLines:
   - Hello Rat
   - I am Rat
+  repeatDialogueLines:
+  - Back again, Rat?
+  - Have another look at what I have for sale.
   Line1:
     Guid:
       Data1: 639786077
@@ -9876,6 +9881,48 @@ MonoBehaviour:
       Data3: -1565600839
       Data4: 2030436065
     Path: event:/Character/NPC_Shopkeep_Line2
+  repeatVoiceLines: []
+--- !u!114 &736006249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736006245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8f19e3c4b2d47f69c0a8e1d2f3b4c5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopTitle: SHOP
+  items:
+  - itemId: health_potion
+    displayName: Health Potion
+    buyPrice: 5
+    sellPrice: 2
+    startingStock: 5
+  - itemId: rope
+    displayName: Rope
+    buyPrice: 8
+    sellPrice: 4
+    startingStock: 3
+  - itemId: lantern
+    displayName: Lantern
+    buyPrice: 12
+    sellPrice: 6
+    startingStock: 2
+  shopRoot: {fileID: 0}
+  titleLabel: {fileID: 0}
+  balanceLabel: {fileID: 0}
+  catalogLabel: {fileID: 0}
+  instructionLabel: {fileID: 0}
+  statusLabel: {fileID: 0}
+  buyButton: {fileID: 0}
+  sellButton: {fileID: 0}
+  closeButton: {fileID: 0}
+  buildPlaceholderUI: 1
+  panelColor: {r: 0.05, g: 0.07, b: 0.12, a: 0.95}
+  buttonColor: {r: 0.15, g: 0.28, b: 0.42, a: 1}
 --- !u!1 &737008405
 GameObject:
   m_ObjectHideFlags: 0

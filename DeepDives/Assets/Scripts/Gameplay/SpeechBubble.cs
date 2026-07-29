@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -17,6 +18,9 @@ public class SpeechBubble : MonoBehaviour
 
     private AudioSource audioSource;
     private float lastSoundTime;
+
+    public event Action<int> LineStarted;
+    public event Action DialogueCompleted;
 
     private void Awake()
     {
@@ -55,9 +59,14 @@ public class SpeechBubble : MonoBehaviour
         currentLineIndex++;
 
         if (currentLineIndex < dialogueLines.Length)
+        {
             ShowCurrentLine();
+        }
         else
+        {
             EndDialogue();
+            DialogueCompleted?.Invoke();
+        }
     }
 
     private void ShowCurrentLine()
@@ -69,6 +78,7 @@ public class SpeechBubble : MonoBehaviour
         speechText.maxVisibleCharacters = 0;
         speechText.ForceMeshUpdate();
         typingCoroutine = StartCoroutine(TypeLine());
+        LineStarted?.Invoke(currentLineIndex);
     }
 
     private IEnumerator TypeLine()
