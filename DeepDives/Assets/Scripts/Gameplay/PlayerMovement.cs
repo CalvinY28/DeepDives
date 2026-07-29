@@ -150,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
             playerCollider.sharedMaterial = landMaterial;
 
         if (snapshotInstance.isValid())
-            snapshotInstance.stop(STOP_MODE.ALLOWFADEOUT);
+            snapshotInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
     private void OnDestroy()
@@ -158,7 +158,7 @@ public class PlayerMovement : MonoBehaviour
         if (!snapshotInstance.isValid())
             return;
 
-        snapshotInstance.stop(STOP_MODE.IMMEDIATE);
+        snapshotInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         snapshotInstance.release();
     }
 
