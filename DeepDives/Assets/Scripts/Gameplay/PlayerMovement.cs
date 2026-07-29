@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using FMOD.Studio;
 using FMODUnity;
@@ -18,6 +16,10 @@ public class PlayerMovement : MonoBehaviour
     public PhysicsMaterial2D landMaterial;
     public PhysicsMaterial2D waterMaterial;
 
+    private static readonly int SpeedHash = Animator.StringToHash("Speed");
+    private static readonly int IsGroundedHash = Animator.StringToHash("isGrounded");
+    private static readonly int IsSwimmingHash = Animator.StringToHash("isSwimming");
+
     private Rigidbody2D rb;
     private float moveInput;
     private bool isGrounded;
@@ -25,11 +27,12 @@ public class PlayerMovement : MonoBehaviour
     private bool wasSwimming;
     private float currentVelocityX;
     private Collider2D playerCollider;
+    private int waterLayer;
 
     private Animator anim;
     private SpriteRenderer spriteRenderer;
 
-    [Header("FMOD Footsteps")] // note this could be done as an animation event wouldve made it easier
+    [Header("FMOD Footsteps")]
     public EventReference footstepEvent;
     public LayerMask footstepSurfaceLayers;
     public float footstepRayDistance = 0.3f;
@@ -38,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float walkStepInterval = 0.45f;
 
-    private float footstepTimer = 0f;
+    private float footstepTimer;
 
     [Header("FMOD Player Jump/Swim")]
     public EventReference playerJump;
@@ -48,13 +51,13 @@ public class PlayerMovement : MonoBehaviour
     public EventReference snapshotEvent;
     private EventInstance snapshotInstance;
 
-    void Start()
+    private void Start()
     {
         snapshotInstance = RuntimeManager.CreateInstance(snapshotEvent);
         playerCollider = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
+        waterLayer = LayerMask.NameToLayer("Water");
 
-        // Get Animator and SpriteRenderer from child
         if (spriteObject != null)
         {
             anim = spriteObject.GetComponent<Animator>();
@@ -62,35 +65,31 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("not assigned");
+            Debug.LogWarning("Player sprite object is not assigned.", this);
         }
     }
 
-    void Update()
+    private void Update()
     {
-        if (Time.timeScale == 0) return; // Prevent input if paused by menu
+        if (Time.timeScale == 0f)
+            return;
+
         moveInput = Input.GetAxisRaw("Horizontal");
 
-        // Flip sprite
-        if (moveInput != 0)
-            spriteRenderer.flipX = moveInput < 0;
+        if (spriteRenderer != null && moveInput != 0f)
+            spriteRenderer.flipX = moveInput < 0f;
 
         float targetVelocityX = moveInput * moveSpeed;
         float lerpSpeed = isSwimming ? waterLerpSpeed : landLerpSpeed;
-
         currentVelocityX = Mathf.Lerp(currentVelocityX, targetVelocityX, Time.deltaTime * lerpSpeed);
 
-        // Handle vertical movement
         bool startedSwimming = isSwimming && !wasSwimming;
+        rb.linearVelocity = new Vector2(currentVelocityX, rb.linearVelocity.y);
 
         if (isSwimming)
         {
-
             if (startedSwimming)
-            {
                 RuntimeManager.PlayOneShot(playerSwim, transform.position);
-            }
-            rb.linearVelocity = new Vector2(currentVelocityX, rb.linearVelocity.y);
 
             if (Input.GetButtonDown("Jump"))
             {
@@ -98,66 +97,69 @@ public class PlayerMovement : MonoBehaviour
                 RuntimeManager.PlayOneShot(playerSwim, transform.position);
             }
         }
-        else
+        else if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            rb.linearVelocity = new Vector2(currentVelocityX, rb.linearVelocity.y);
-
-            if (Input.GetButtonDown("Jump") && isGrounded)
-            {
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-                RuntimeManager.PlayOneShot(playerJump, transform.position);
-            }
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            RuntimeManager.PlayOneShot(playerJump, transform.position);
         }
+
         wasSwimming = isSwimming;
 
         if (anim != null)
         {
-            anim.SetFloat("Speed", Mathf.Abs(moveInput));
-            anim.SetBool("isGrounded", isGrounded);
-            anim.SetBool("isSwimming", isSwimming);
+            anim.SetFloat(SpeedHash, Mathf.Abs(moveInput));
+            anim.SetBool(IsGroundedHash, isGrounded);
+            anim.SetBool(IsSwimmingHash, isSwimming);
         }
 
-        DetectFootstepSurface();
         HandleFootsteps();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        // Ground check only when not swimming
-        if (!isSwimming)
+        if (!isSwimming && groundCheck != null)
             isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Water"))
-        {
-            isSwimming = true;
-            rb.gravityScale = 1f; // simulate buoyancy
-            currentVelocityX = rb.linearVelocity.x;
+        if (collision.gameObject.layer != waterLayer)
+            return;
 
-            if (playerCollider != null && waterMaterial != null)
-            {
-                playerCollider.sharedMaterial = waterMaterial;
-            }
+        isSwimming = true;
+        rb.gravityScale = 1f;
+        currentVelocityX = rb.linearVelocity.x;
+
+        if (playerCollider != null && waterMaterial != null)
+            playerCollider.sharedMaterial = waterMaterial;
+
+        if (snapshotInstance.isValid())
             snapshotInstance.start();
-        }
     }
 
-    void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Water"))
-        {
-            isSwimming = false;
-            rb.gravityScale = 3f; // reset to normal
-            currentVelocityX = rb.linearVelocity.x;
+        if (collision.gameObject.layer != waterLayer)
+            return;
 
-            if (playerCollider != null && landMaterial != null)
-            {
-                playerCollider.sharedMaterial = landMaterial;
-            }
-            snapshotInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        }
+        isSwimming = false;
+        rb.gravityScale = 3f;
+        currentVelocityX = rb.linearVelocity.x;
+
+        if (playerCollider != null && landMaterial != null)
+            playerCollider.sharedMaterial = landMaterial;
+
+        if (snapshotInstance.isValid())
+            snapshotInstance.stop(STOP_MODE.ALLOWFADEOUT);
+    }
+
+    private void OnDestroy()
+    {
+        if (!snapshotInstance.isValid())
+            return;
+
+        snapshotInstance.stop(STOP_MODE.IMMEDIATE);
+        snapshotInstance.release();
     }
 
     public bool IsSwimming()
@@ -165,9 +167,10 @@ public class PlayerMovement : MonoBehaviour
         return isSwimming;
     }
 
-    void DetectFootstepSurface()
+    private void DetectFootstepSurface()
     {
-        if (groundCheck == null) return;
+        if (groundCheck == null)
+            return;
 
         RaycastHit2D hit = Physics2D.Raycast(
             groundCheck.position,
@@ -176,21 +179,17 @@ public class PlayerMovement : MonoBehaviour
             footstepSurfaceLayers
         );
 
-        if (!hit.collider) return;
+        if (!hit.collider)
+            return;
 
-        if (hit.collider.CompareTag("Sand")) // if im hitting sand tag change label to sand and etc
-            currentSurfaceLabel = "Sand";
-        else if (hit.collider.CompareTag("Wood"))
-            currentSurfaceLabel = "Wood";
-        else
-            currentSurfaceLabel = "Wood";
+        currentSurfaceLabel = hit.collider.CompareTag("Sand") ? "Sand" : "Wood";
     }
 
-    void HandleFootsteps()
+    private void HandleFootsteps()
     {
         bool isMoving = Mathf.Abs(moveInput) > 0.1f;
 
-        if (!isGrounded || isSwimming || !isMoving) // not playing footstep
+        if (!isGrounded || isSwimming || !isMoving)
         {
             footstepTimer = 0f;
             return;
@@ -198,20 +197,20 @@ public class PlayerMovement : MonoBehaviour
 
         footstepTimer += Time.deltaTime;
 
-        if (footstepTimer >= walkStepInterval) // playing footstep with interval to make slower or faster.
-        {
-            PlayFootstep();
-            footstepTimer = 0f;
-        }
+        if (footstepTimer < walkStepInterval)
+            return;
+
+        DetectFootstepSurface();
+        PlayFootstep();
+        footstepTimer = 0f;
     }
 
-    public void PlayFootstep() // make footstep noise at player position and make sure to check the type.
+    public void PlayFootstep()
     {
         EventInstance step = RuntimeManager.CreateInstance(footstepEvent);
         RuntimeManager.AttachInstanceToGameObject(step, gameObject);
         step.setParameterByNameWithLabel("SurfaceType", currentSurfaceLabel);
         step.start();
-        step.release(); // release smoothes it just in case (ialready tried to smooth it)
+        step.release();
     }
 }
-
